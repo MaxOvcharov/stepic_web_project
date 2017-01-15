@@ -4,17 +4,20 @@ from django.contrib import admin
 admin.autodiscover()
 from qa.views import login_view, signup, quetion_add, popular, new
 
+from qa import views
+
 urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'ask.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
-
+    url(r'^question/', include('qa.urls')),
+    url(r'^$', include('qa.urls')),
+    url(r'^login/.*$',views.login_view),
+    url(r'^signup/.*$',views.signup),
+    url(r'^ask/.*$',views.question_add),
+    url(r'^popular/.*$',views.popular),
+    url(r'^answer/.*$',views.answer_add),
+    url(r'^question/(?P<question_id>[0-9]+)/answer/$', views.answer_add, name='answer_add'),
+    url(r'^new/.*$',views.test),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^$', ask.views.home, name='home'),
-    url(r'^login/', login_view, name='login_view'),
-    url(r'^signup/', signup, name='signup'),
-    url(r'^ask/', quetion_add, name='ask'),
-    url(r'^popular/', popular, name='popular'),
-    url(r'^new/', new, name='new'),
-    url(r'^question/(?P<id>\d+/$', quetion_add, name='answer_add'),
 )

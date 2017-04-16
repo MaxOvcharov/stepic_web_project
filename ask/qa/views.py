@@ -14,7 +14,7 @@ def test(request, *args, **kwargs):
 
 
 @require_GET
-def new_qa(request):
+def main(request):
     new_qas = Question.objects.new()
     base_url = '/?page='
     paginator, page = paginate(request, new_qas, base_url)
@@ -25,7 +25,7 @@ def new_qa(request):
 
 
 @require_GET
-def popular_qa(request):
+def popular(request):
     popular_qas = Question.objects.popular()
     base_url = '/popular/?page='
     paginator, page = paginate(request, popular_qas, base_url)

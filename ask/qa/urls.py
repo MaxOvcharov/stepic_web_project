@@ -10,4 +10,4 @@ urlpatterns = patterns('qa.views',
                        url(r'^answer/', 'answer', name='answer'),
                        url(r'^login/', 'my_login', name='login'),
                        url(r'^signup/', 'signup', name='signup'),
-                       url(r'^$', 'new_qa', name='new_qa'), )
+                       url(r'^$', 'main', name='main'), )

@@ -37,13 +37,9 @@ def popular_qa(request):
 
 def question(request, qa_id):
     qa = get_object_or_404(Question, id=qa_id)
-    try:
-        answer_for_qa = qa.answer_set.all()
-    except Answer.DoesNotExist:
-        answer_for_qa = None
     return render(request, 'qa/question.html',
                   {'question': qa,
-                   'answers': answer_for_qa})
+                   'answers': qa.answer_set.all()})
 
 
 def paginate(request, qs, base_url):

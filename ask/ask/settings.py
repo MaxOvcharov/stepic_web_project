@@ -23,6 +23,7 @@ SECRET_KEY = '&$42)h_&6)8!zy-lb(n0)uctxeiatc!0ns@!xf2)5!gcgwj+=!'
 DEBUG = True
 
 TEMPLATE_DEBUG = True
+TEMPLATE_DIRS = ('/home/box/web/ask/qa/templates')
 
 ALLOWED_HOSTS = []
 
@@ -58,20 +59,20 @@ WSGI_APPLICATION = 'ask.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME':   'django_db',
-        'USER': 'box',
-        'PASSWORD': '121212',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME':   'django_db',
+#         'USER': 'box',
+#         'PASSWORD': '121212',
+#     }
+# }
 
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru-ru'
 
 TIME_ZONE = 'UTC'
 
@@ -86,3 +87,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
 STATIC_URL = '/static/'
+
+try:
+    from local_settings import *
+except ImportError:
+    pass

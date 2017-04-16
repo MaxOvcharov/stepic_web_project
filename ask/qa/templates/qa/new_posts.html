@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Новые вопросы</title>
+</head>
+<body>
+        <nav>
+            <ul>
+                {% for new in new_qas %}
+                    <li>
+                        <p>new.title</p>
+                    </li>
+                {% endfor %}
+            </ul>
+            <ul>
+                {% for p in paginator.page_range %}
+                    {% if p.number == page.number %}
+                        <li>
+                    {% else %}
+                        <li>
+                    {% endif %}
+                        <a href="{{paginator.baseurl}}{{p.number}}">
+                            {{p.number}}
+                        </a>
+                        </li>
+                {% endfor %}
+            </ul>
+        </nav>
+
+</body>
+</html>

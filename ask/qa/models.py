@@ -4,23 +4,12 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
-# Create your models here.
-class UserManager(models.Manager):
-    """Useful user db-methods"""
-    def random(self):
-        count = self.aggregate(ids=Count('id'))['ids']
-        random_index = randint(0, count - 1)
-        return self.all()[random_index]
-
-    def next_step(self, chat_id):
-        self.filter(chat_id=chat_id).update(step=F('step') + 1)
-
-
 class QuestionManager(models.Manager):
-    def new():
-        pass
 
-    def popular():
+    def new(self):
+        return self.order_by('-id')
+
+    def popular(self):
         pass
 
 

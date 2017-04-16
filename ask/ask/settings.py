@@ -63,7 +63,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME':   'stepic_web',
-        'USER': 'box1',
+        'USER': 'box',
         'PASSWORD': '121212',
     }
 }
@@ -120,21 +120,21 @@ LOGGING = {
             'level': 'DEBUG',
             'filters': ['require_debug_true'],
             'class': 'logging.FileHandler',
-            'filename': '/home/django/logs/telegram/django_dev.log',
+            'filename': '/home/box/logs/django_dev.log',
             'formatter': 'verbose'
         },
         'production_logfile': {
             'level': 'ERROR',
             'filters': ['require_debug_false'],
             'class': 'logging.FileHandler',
-            'filename': '/home/django/logs/telegram/django_production.log',
+            'filename': '/home/box/logs/django_production.log',
             'formatter': 'simple'
         },
         'cron_timetable': {
             'level': 'DEBUG',
             'filters': ['require_debug_false'],
             'class': 'logging.FileHandler',
-            'filename': '/home/django/logs/telegram/django_cron.log',
+            'filename': '/home/box/logs/django_cron.log',
             'formatter': 'verbose'
         },
         'stepic_logfile': {
@@ -148,7 +148,7 @@ LOGGING = {
             'level': 'DEBUG',
             'filters': ['require_debug_false','require_debug_true'],
             'class': 'logging.FileHandler',
-            'filename': '/home/django/logs/telegram/django_dba.log',
+            'filename': '/home/box/logs/django_dba.log',
             'formatter': 'simple'
         },
     },

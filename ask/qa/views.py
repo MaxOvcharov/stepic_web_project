@@ -17,9 +17,9 @@ def new_qa(request):
     base_url = '/?page='
     paginator, page = paginate(request, new_qas, base_url)
     return render(request, 'qa/new_qa.html',
-                  {new_qas: page.object_list,
-                   paginator: paginator,
-                   page: page})
+                  {'new_qas': page.object_list,
+                   'paginator': paginator,
+                   'page': page})
 
 
 def popular_qa(request):
@@ -27,9 +27,9 @@ def popular_qa(request):
     base_url = '/popular/?page='
     paginator, page = paginate(request, popular_qas, base_url)
     return render(request, 'qa/popular_qa.html',
-                  {popular_qas: page.object_list,
-                   paginator: paginator,
-                   page: page})
+                  {'popular_qas': page.object_list,
+                   'paginator': paginator,
+                   'page': page})
 
 
 def question(request, qa_id):

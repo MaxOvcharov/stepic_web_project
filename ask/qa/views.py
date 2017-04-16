@@ -1,5 +1,5 @@
 from models import Question, Answer
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, Http404
 from django.core.paginator import Paginator, EmptyPage
 
@@ -12,10 +12,31 @@ def new_qa(request):
     new_qas = Question.objects.new()
     base_url = '/?page='
     paginator, page = paginate(request, new_qas, base_url)
-    return render(request, 'qa/new_posts.html',
+    return render(request, 'qa/new_qa.html',
                   {new_qas: page.object_list,
                    paginator: paginator,
                    page: page})
+
+
+def popular_qa(request):
+    popular_qas = Question.objects.popular()
+    base_url = '/popular/?page='
+    paginator, page = paginate(request, popular_qas, base_url)
+    return render(request, 'qa/popular_qa.html',
+                  {popular_qas: page.object_list,
+                   paginator: paginator,
+                   page: page})
+
+
+def question(request, qa_id):
+    qa = get_object_or_404(Question, id=qa_id)
+    try:
+        answer_for_qa = qa.answer.filter(question=qa_id)
+    except Answer.DoesNotExist:
+        answer_for_qa = None
+    return render(request, 'qa/question.html',
+                  {'question': qa,
+                   'answers': answer_for_qa})
 
 
 def paginate(request, qs, base_url):

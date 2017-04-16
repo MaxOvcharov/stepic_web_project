@@ -5,14 +5,18 @@
     <title>Вопрос #{{question.id}}</title>
 </head>
 <body>
-        <p>{{question.title}}</p>
-        <i>{{question.text}}</i>
+        <h1>Question</h1>
+        <h3>Title: {{ question.title }}</h3>
+        <h3>Text:  {{ question.text }}</h3>
+        <h3>Author:  {{ question.author }}</h3>
+        <hr>
+
+        <h3>Answers:</h3>
         <ul>
-            {% for answer in answers %}
-                <li>
-                    <p>answers.text</p>
-                </li>
-            {% endfor %}
+        {% for answer in answers %}
+          <li>{{ answer.text }}</li>
+        {% endfor %}
         </ul>
+        <hr>
 </body>
 </html>

@@ -4,6 +4,7 @@ from models import Question, Answer
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, Http404
 from django.core.paginator import Paginator, EmptyPage
+from django.views.decorators.http import require_GET
 
 logger = logging.getLogger('stepic')
 
@@ -12,6 +13,7 @@ def test(request, *args, **kwargs):
     return HttpResponse('OK', status=200)
 
 
+@require_GET
 def new_qa(request):
     new_qas = Question.objects.new()
     base_url = '/?page='
@@ -22,6 +24,7 @@ def new_qa(request):
                    'page': page})
 
 
+@require_GET
 def popular_qa(request):
     popular_qas = Question.objects.popular()
     base_url = '/popular/?page='
@@ -35,7 +38,7 @@ def popular_qa(request):
 def question(request, qa_id):
     qa = get_object_or_404(Question, id=qa_id)
     try:
-        answer_for_qa = qa.answer.filter(question=qa_id)
+        answer_for_qa = qa.answer_set.all()
     except Answer.DoesNotExist:
         answer_for_qa = None
     return render(request, 'qa/question.html',

@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from django.db import models
+from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 
 
@@ -24,9 +25,11 @@ class Question(models.Model):
 
     objects = QuestionManager()
 
+    def get_absolute_url(self):
+        return reverse('question', kwargs={"id": self.id})
+
     def __unicode__(self):
-        return 'Title: %s; Text: %s; Added At: %s; Rating: %s; Author: %s' % \
-               (self.title, self.text, self.added_at, self.rating, self.author)
+        return self.title
 
     class Meta:
         db_table = 'question'
@@ -41,8 +44,7 @@ class Answer(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE, verbose_name="Вопрос на который отвечают")
 
     def __unicode__(self):
-        return 'Text: %s; Added At: %s; Author: %s; Question: %s;' % \
-               (self.text, self.added_at, self.author, self.question)
+        return self.text
 
     class Meta:
         db_table = 'Answer'

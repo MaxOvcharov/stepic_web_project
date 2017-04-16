@@ -5,28 +5,24 @@
     <title>Новые вопросы</title>
 </head>
 <body>
-        <nav>
-            <ul>
-                {% for new in new_qas %}
-                    <li>
-                        <p>new.title</p>
-                    </li>
-                {% endfor %}
-            </ul>
-            <ul>
-                {% for p in paginator.page_range %}
-                    {% if p == page.number %}
-                        <li>
-                    {% else %}
-                        <li>
-                    {% endif %}
-                        <a href="{{paginator.baseurl}}{{p}}">
-                            {{p}}
-                        </a>
-                        </li>
-                {% endfor %}
-            </ul>
-        </nav>
+        <h1>List of questions:</h1>
+            {% for question in new_qas %}
+              <p>{{question.id}}: {{ question.title }}
+                <a href="{{ paginator.baseurl }}/question/{{ question.id }}/">
+                  {{ paginator.baseurl }}/question/{{ question.id }}/
+                </a>
+              </p>
+            {% endfor %}
+
+            <nav><ul>
+            {% for page_number in paginator.page_range %}
+              <li>
+                <a href="{{ paginator.baseurl }}?page={{ page_number }}">
+                  {{ page_number }}
+                </a>
+              </li>
+            {% endfor %}
+            </ul></nav>
 
 </body>
 </html>

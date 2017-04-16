@@ -141,7 +141,7 @@ LOGGING = {
             'level': 'DEBUG',
             'filters': ['require_debug_true'],
             'class': 'logging.FileHandler',
-            'filename': '/home/django/logs/telegram/django_telegram.log',
+            'filename': '/home/box/logs/django_stepic.log',
             'formatter': 'verbose'
         },
         'dba_logfile': {

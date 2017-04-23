@@ -40,9 +40,34 @@ def popular(request):
 
 def question(request, qa_id):
     qa = get_object_or_404(Question, id=qa_id)
+
+    if request.method == 'POST':
+        form = AnswerForm(request.POST)
+        if form.is_valid():
+            answer = form.save()
+            answer.author = request.user
+            answer.save()
+            return HttpResponseRedirect(qa.get_url())
+    else:
+        form = AnswerForm(initial={'question': qa.id})
     return render(request, 'qa/question.html',
                   {'question': qa,
-                   'answers': qa.answer_set.all()})
+                   'answers': qa.answer_set.all(),
+                   'form': form
+                   })
+
+
+def ask(request):
+    if request.method == 'POST':
+        form = AskForm(request.POST)
+        if form.is_valid():
+            qa = form.save()
+            qa.author = request.user
+            qa.save()
+            return HttpResponseRedirect(qa.get_url())
+    else:
+        form = AskForm()
+    return render(request, 'qa/ask.html', {'form': form})
 
 
 def paginate(request, qs, base_url):

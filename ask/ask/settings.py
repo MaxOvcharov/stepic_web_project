@@ -23,7 +23,22 @@ SECRET_KEY = '&$42)h_&6)8!zy-lb(n0)uctxeiatc!0ns@!xf2)5!gcgwj+=!'
 DEBUG = True
 
 TEMPLATE_DEBUG = True
-TEMPLATE_DIRS = ('/home/box/web/ask/qa/templates', )
+# TEMPLATE_DIRS = ('/home/box/web/ask/qa/templates', )
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [os.path.join(BASE_DIR, 'qa')],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]
 
 ALLOWED_HOSTS = []
 

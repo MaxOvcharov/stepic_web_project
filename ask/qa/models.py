@@ -16,16 +16,16 @@ class QuestionManager(models.Manager):
 
 class Question(models.Model):
     """Information about question"""
-    title = models.CharField(max_length=150, verbose_name="Заголовок")
+    title = models.CharField(max_length=150, bd_index=True, verbose_name="Заголовок")
     text = models.TextField(verbose_name="Полный текст вопроса")
     added_at = models.DateTimeField(blank=True, auto_now_add=True, verbose_name="Дата добавления вопроса")
     rating = models.IntegerField(default=0, verbose_name="Рейтинг вопроса")
-    author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Автор вопроса")
+    author = models.ForeignKey(User, blank=True, null=True, on_delete=models.SET_NULL, verbose_name="Автор вопроса")
     likes = models.ManyToManyField(User, related_name='question_like_user')
 
     objects = QuestionManager()
 
-    def get_absolute_url(self):
+    def get_url(self):
         return reverse('question', kwargs={"id": self.id})
 
     def __unicode__(self):
@@ -41,7 +41,8 @@ class Answer(models.Model):
     text = models.TextField(verbose_name="Полный текст ответа")
     added_at = models.DateTimeField(blank=True, auto_now_add=True, verbose_name="Дата добавления ответа")
     author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Автор ответа")
-    question = models.ForeignKey(Question, on_delete=models.CASCADE, verbose_name="Вопрос на который отвечают")
+    question = models.ForeignKey(Question, blank=True, null=True, on_delete=models.SET_NULL,
+                                 verbose_name="Вопрос на который отвечают")
 
     def __unicode__(self):
         return self.text

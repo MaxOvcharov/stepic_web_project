@@ -1,10 +1,13 @@
 import logging
 
 from models import Question, Answer
+from forms import AskForm, AnswerForm
+
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse, Http404
+from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.core.paginator import Paginator, EmptyPage
 from django.views.decorators.http import require_GET
+
 
 logger = logging.getLogger('stepic')
 

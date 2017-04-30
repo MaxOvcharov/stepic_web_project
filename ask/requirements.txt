@@ -1,0 +1,8 @@
+appdirs==1.4.3
+checksum==1.0.3
+Django==1.10
+packaging==16.8
+pyparsing==2.2.0
+pyzmq==16.0.2
+six==1.10.0
+update==0.4.4

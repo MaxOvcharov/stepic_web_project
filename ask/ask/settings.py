@@ -20,7 +20,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 SECRET_KEY = '&$42)h_&6)8!zy-lb(n0)uctxeiatc!0ns@!xf2)5!gcgwj+=!'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
 
 # TEMPLATE_DEBUG = True
 # TEMPLATE_DIRS = ('/home/box/web/ask/qa/templates', )
@@ -74,20 +74,20 @@ WSGI_APPLICATION = 'ask.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME':   'stepic_web',
-#         'USER': 'box',
-#         'PASSWORD': '121212',
-#     }
-# }
 DATABASES = {
-   'default': {
-       'ENGINE': 'django.db.backends.sqlite3',
-       'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-   }
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME':   'stepic_web',
+        'USER': 'box',
+        'PASSWORD': '121212',
+    }
 }
+# DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.sqlite3',
+#        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#    }
+# }
 
 
 # Internationalization
@@ -109,95 +109,95 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-# LOGGING = {
-#     'version': 1,
-#     'disable_existing_loggers': True,
-#     'filters': {
-#         'require_debug_false': {
-#             '()': 'django.utils.log.RequireDebugFalse',
-#         },
-#         'require_debug_true': {
-#             '()': 'django.utils.log.RequireDebugTrue',
-#         },
-#     },
-#     'formatters': {
-#         'simple': {
-#             'format': '[%(asctime)s] %(levelname)s %(message)s',
-#             'datefmt': '%Y-%m-%d %H:%M:%S'
-#         },
-#         'verbose': {
-#             'format': '[%(asctime)s] %(levelname)s [%(name)s.%(funcName)s:%(lineno)d] %(message)s',
-#             'datefmt': '%Y-%m-%d %H:%M:%S'
-#         },
-#     },
-#     'handlers': {
-#         'console': {
-#             'level': 'DEBUG',
-#             'filters': ['require_debug_true'],
-#             'class': 'logging.StreamHandler',
-#             'formatter': 'simple'
-#         },
-#         'development_logfile': {
-#             'level': 'DEBUG',
-#             'filters': ['require_debug_true'],
-#             'class': 'logging.FileHandler',
-#             'filename': '/home/box/logs/django_dev.log',
-#             'formatter': 'verbose'
-#         },
-#         'production_logfile': {
-#             'level': 'ERROR',
-#             'filters': ['require_debug_false'],
-#             'class': 'logging.FileHandler',
-#             'filename': '/home/box/logs/django_production.log',
-#             'formatter': 'simple'
-#         },
-#         'cron_timetable': {
-#             'level': 'DEBUG',
-#             'filters': ['require_debug_false'],
-#             'class': 'logging.FileHandler',
-#             'filename': '/home/box/logs/django_cron.log',
-#             'formatter': 'verbose'
-#         },
-#         'stepic_logfile': {
-#             'level': 'DEBUG',
-#             'filters': ['require_debug_true'],
-#             'class': 'logging.FileHandler',
-#             'filename': '/home/box/logs/django_stepic.log',
-#             'formatter': 'verbose'
-#         },
-#         'dba_logfile': {
-#             'level': 'DEBUG',
-#             'filters': ['require_debug_false','require_debug_true'],
-#             'class': 'logging.FileHandler',
-#             'filename': '/home/box/logs/django_dba.log',
-#             'formatter': 'simple'
-#         },
-#     },
-#     'loggers': {
-#         'coffeehouse': {
-#             'handlers': ['console', 'development_logfile', 'production_logfile'],
-#          },
-#         'dba': {
-#             'handlers': ['console', 'dba_logfile'],
-#         },
-#         'django': {
-#             'handlers': ['console', 'development_logfile', 'production_logfile'],
-#         },
-#         'py.warnings': {
-#             'handlers': ['console', 'development_logfile'],
-#         },
-#         'cron': {
-#             'handlers': ['cron_timetable', 'production_logfile'],
-#             'propagate': True,
-#             'level': 'DEBUG',
-#         },
-#         'stepic': {
-#             'handlers': ['stepic_logfile', 'production_logfile', 'console'],
-#             'propagate': True,
-#             'level': 'DEBUG',
-#         },
-#     }
-# }
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': True,
+    'filters': {
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse',
+        },
+        'require_debug_true': {
+            '()': 'django.utils.log.RequireDebugTrue',
+        },
+    },
+    'formatters': {
+        'simple': {
+            'format': '[%(asctime)s] %(levelname)s %(message)s',
+            'datefmt': '%Y-%m-%d %H:%M:%S'
+        },
+        'verbose': {
+            'format': '[%(asctime)s] %(levelname)s [%(name)s.%(funcName)s:%(lineno)d] %(message)s',
+            'datefmt': '%Y-%m-%d %H:%M:%S'
+        },
+    },
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'filters': ['require_debug_true'],
+            'class': 'logging.StreamHandler',
+            'formatter': 'simple'
+        },
+        'development_logfile': {
+            'level': 'DEBUG',
+            'filters': ['require_debug_true'],
+            'class': 'logging.FileHandler',
+            'filename': '/home/box/logs/django_dev.log',
+            'formatter': 'verbose'
+        },
+        'production_logfile': {
+            'level': 'ERROR',
+            'filters': ['require_debug_false'],
+            'class': 'logging.FileHandler',
+            'filename': '/home/box/logs/django_production.log',
+            'formatter': 'simple'
+        },
+        'cron_timetable': {
+            'level': 'DEBUG',
+            'filters': ['require_debug_false'],
+            'class': 'logging.FileHandler',
+            'filename': '/home/box/logs/django_cron.log',
+            'formatter': 'verbose'
+        },
+        'stepic_logfile': {
+            'level': 'DEBUG',
+            'filters': ['require_debug_true'],
+            'class': 'logging.FileHandler',
+            'filename': '/home/box/logs/django_stepic.log',
+            'formatter': 'verbose'
+        },
+        'dba_logfile': {
+            'level': 'DEBUG',
+            'filters': ['require_debug_false','require_debug_true'],
+            'class': 'logging.FileHandler',
+            'filename': '/home/box/logs/django_dba.log',
+            'formatter': 'simple'
+        },
+    },
+    'loggers': {
+        'coffeehouse': {
+            'handlers': ['console', 'development_logfile', 'production_logfile'],
+         },
+        'dba': {
+            'handlers': ['console', 'dba_logfile'],
+        },
+        'django': {
+            'handlers': ['console', 'development_logfile', 'production_logfile'],
+        },
+        'py.warnings': {
+            'handlers': ['console', 'development_logfile'],
+        },
+        'cron': {
+            'handlers': ['cron_timetable', 'production_logfile'],
+            'propagate': True,
+            'level': 'DEBUG',
+        },
+        'stepic': {
+            'handlers': ['stepic_logfile', 'production_logfile', 'console'],
+            'propagate': True,
+            'level': 'DEBUG',
+        },
+    }
+}
 
 #
 #

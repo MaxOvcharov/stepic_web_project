@@ -160,7 +160,7 @@ LOGGING = {
         },
         'stepic_logfile': {
             'level': 'DEBUG',
-            'filters': ['require_debug_true'],
+            'filters': ['require_debug_false'],
             'class': 'logging.FileHandler',
             'filename': '/home/box/logs/django_stepic.log',
             'formatter': 'verbose'
@@ -192,7 +192,7 @@ LOGGING = {
             'level': 'DEBUG',
         },
         'stepic': {
-            'handlers': ['stepic_logfile', 'production_logfile', 'console'],
+            'handlers': ['stepic_logfile', 'production_logfile'],
             'propagate': True,
             'level': 'DEBUG',
         },

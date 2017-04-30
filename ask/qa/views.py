@@ -45,11 +45,15 @@ def question(request, qa_id):
         form = AnswerForm(request.POST)
         if form.is_valid():
             answer = form.save()
-            answer.author = request.user
+            user = request.user
+            if not user == 'AnonymousUser':
+                answer.author = qa.get_user(username=user)
+            else:
+                answer.author = qa.get_user()
             answer.save()
             return HttpResponseRedirect(qa.get_url())
     else:
-        form = AnswerForm(initial={'question': qa.id})
+        form = AnswerForm(initial={'question': qa})
     return render(request, 'qa/question.html',
                   {'question': qa,
                    'answers': qa.answer_set.all(),
@@ -62,7 +66,11 @@ def ask(request):
         form = AskForm(request.POST)
         if form.is_valid():
             qa = form.save()
-            qa.author = request.user
+            user = request.user
+            if not user == 'AnonymousUser':
+                qa.author = qa.get_user(username=user)
+            else:
+                qa.author = qa.get_user()
             qa.save()
             return HttpResponseRedirect(qa.get_url())
     else:

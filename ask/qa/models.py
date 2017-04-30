@@ -26,7 +26,20 @@ class Question(models.Model):
     objects = QuestionManager()
 
     def get_url(self):
-        return reverse('question', kwargs={"id": self.id})
+        return reverse('question', args=[self.pk])
+
+    @staticmethod
+    def get_user(username=None):
+        try:
+            if not username:
+                user = User.objects.get(pk=1)
+            else:
+                user = User.objects.get(username=username)
+            return user
+        except User.DoesNotExist, e:
+            print "Handle ERROR: %s" % e
+            user = User.objects.get(pk=1)
+            return user
 
     def __unicode__(self):
         return self.title

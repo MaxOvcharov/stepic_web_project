@@ -22,7 +22,7 @@ SECRET_KEY = '&$42)h_&6)8!zy-lb(n0)uctxeiatc!0ns@!xf2)5!gcgwj+=!'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-TEMPLATE_DEBUG = True
+# TEMPLATE_DEBUG = True
 # TEMPLATE_DIRS = ('/home/box/web/ask/qa/templates', )
 TEMPLATES = [
     {
@@ -82,6 +82,12 @@ DATABASES = {
         'PASSWORD': '121212',
     }
 }
+# DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.sqlite3',
+#        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#    }
+# }
 
 
 # Internationalization

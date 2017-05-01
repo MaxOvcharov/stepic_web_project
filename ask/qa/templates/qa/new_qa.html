@@ -17,7 +17,7 @@
             <nav><ul>
             {% for page_number in paginator.page_range %}
               <li>
-                <a href="{{ paginator.baseurl }}?page={{ page_number }}">
+                <a href="{{ paginator.baseurl }}{{ page_number }}">
                   {{ page_number }}
                 </a>
               </li>

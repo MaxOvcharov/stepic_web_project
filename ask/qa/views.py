@@ -1,13 +1,13 @@
 import logging
 
 from models import Question, Answer
-from forms import AskForm, AnswerForm
+from forms import AskForm, AnswerForm, RegistrationForm, LoggingForm
 
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.core.paginator import Paginator, EmptyPage
 from django.views.decorators.http import require_GET
-
+from django.contrib.auth import authenticate, login
 
 logger = logging.getLogger('stepic')
 
@@ -19,8 +19,7 @@ def test(request, *args, **kwargs):
 @require_GET
 def main(request):
     new_qas = Question.objects.new()
-    base_url = '/?page='
-    paginator, page = paginate(request, new_qas, base_url)
+    paginator, page = paginate(request, new_qas)
     return render(request, 'qa/new_qa.html',
                   {'new_qas': page.object_list,
                    'paginator': paginator,
@@ -78,7 +77,7 @@ def ask(request):
     return render(request, 'qa/ask.html', {'form': form})
 
 
-def paginate(request, qs, base_url):
+def paginate(request, qs):
     try:
         limit = int(request.GET.get('limit', 10))
     except ValueError:
@@ -90,9 +89,38 @@ def paginate(request, qs, base_url):
     except ValueError:
         raise Http404
     paginator = Paginator(qs, limit)
-    paginator.baseurl = base_url
     try:
         page = paginator.page(page)
     except EmptyPage:
         page = paginator.page(paginator.num_pages)
     return paginator, page
+
+
+def signup(request):
+    if request.method == 'POST':
+        form = RegistrationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = request.POST['username']
+            password = request.POST['password']
+            user = authenticate(username=username, password=password)
+            logger.debug('User_SIGNUP: %s' % user)
+            login(request, user)
+            return HttpResponseRedirect('/')
+    else:
+        form = RegistrationForm()
+    return render(request, 'qa/signup.html', {'form': form})
+
+
+def my_login(request):
+    if request.method == 'POST':
+        form = LoggingForm(request.POST)
+        if form.is_valid():
+            user = form.get_user()
+            if user:
+                logger.debug('User_LOGIN: %s' % user)
+                login(request, user)
+                return HttpResponseRedirect('/')
+    else:
+        form = LoggingForm()
+    return render(request, 'qa/login.html', {'form': form})
